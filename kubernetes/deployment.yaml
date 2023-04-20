@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grafana-deployment
+  namespace: folder4study
+  labels:
+    app: grafana
+    version: latest
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grafana
+  template:
+    metadata:
+      name: grafana-pod
+      namespace: folder4study
+      labels:
+        app: grafana
+        version: latest
+    spec:
+      securityContext:
+        fsGroup: 472
+        supplementalGroups:
+          - 0
+      containers:
+        - name: grafana-container
+          image: grafana/grafana:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: grafana-port
+              containerPort: 3000
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /var/lib/grafana
+              name: grafana-pv
+          securityContext:
+            runAsUser: 0
+            runAsGroup: 0
+      volumes:
+        - name: grafana-pv
+          persistentVolumeClaim:
+            claimName: grafana-pvc

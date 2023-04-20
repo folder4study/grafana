@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana
+  namespace: folder4study
+  labels:
+    app: grafana
+    version: latest
+spec:
+  type: LoadBalancer
+  selector:
+    app: grafana
+  ports:
+    - name: grafana-port
+      port: 3001
+      targetPort: grafana-port
