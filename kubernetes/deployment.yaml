@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: grafana-deployment
+  name: grafana
   namespace: folder4study
   labels:
     app: grafana
@@ -13,7 +13,7 @@ spec:
       app: grafana
   template:
     metadata:
-      name: grafana-pod
+      name: grafana
       namespace: folder4study
       labels:
         app: grafana
@@ -24,20 +24,20 @@ spec:
         supplementalGroups:
           - 0
       containers:
-        - name: grafana-container
+        - name: grafana
           image: grafana/grafana:latest
           imagePullPolicy: IfNotPresent
           ports:
-            - name: grafana-port
+            - name: port
               containerPort: 3000
               protocol: TCP
           volumeMounts:
             - mountPath: /var/lib/grafana
-              name: grafana-pv
+              name: grafana
           securityContext:
             runAsUser: 0
             runAsGroup: 0
       volumes:
-        - name: grafana-pv
+        - name: grafana
           persistentVolumeClaim:
-            claimName: grafana-pvc
+            claimName: grafana

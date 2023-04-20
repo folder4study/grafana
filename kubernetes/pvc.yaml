@@ -1,7 +1,7 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: grafana-pvc
+  name: grafana
   namespace: folder4study
   labels:
     app: grafana

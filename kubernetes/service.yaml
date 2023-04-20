@@ -11,6 +11,6 @@ spec:
   selector:
     app: grafana
   ports:
-    - name: grafana-port
-      port: 3001
-      targetPort: grafana-port
+    - name: port
+      port: 3000
+      targetPort: port
